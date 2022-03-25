@@ -6,7 +6,7 @@ import (
 )
 
 // GetWithPrefixPattern ...
-func GetWithPrefixPattern(pattern string, limit int64) (keys []string, values []string) {
+func GetWithPrefixPattern(pattern string) (keys []string, values []string) {
 	// Init
 	keys = make([]string, 0)
 	values = make([]string, 0)
@@ -17,9 +17,8 @@ func GetWithPrefixPattern(pattern string, limit int64) (keys []string, values []
 		err    error
 	)
 
-	keys, cursor, err = rdb.Scan(ctx, cursor, pattern, limit).Result()
+	keys, cursor, err = rdb.Scan(ctx, cursor, pattern, 1000000).Result()
 	if err != nil {
-		fmt.Println("err redis scan: ", err.Error())
 		return
 	}
 
