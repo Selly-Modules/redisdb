@@ -2,7 +2,6 @@ package redisdb
 
 import (
 	"context"
-	"fmt"
 )
 
 // GetWithPrefixPattern ...
@@ -23,7 +22,6 @@ func GetWithPrefixPattern(pattern string) (keys []string, values []string) {
 	}
 
 	if len(keys) == 0 {
-		fmt.Println("NO keys")
 		return
 	}
 
