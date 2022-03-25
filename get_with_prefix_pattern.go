@@ -1,6 +1,9 @@
 package redisdb
 
-import "context"
+import (
+	"context"
+	"fmt"
+)
 
 // GetWithPrefixPattern ...
 func GetWithPrefixPattern(pattern string, limit int64) (keys []string, values []string) {
@@ -16,10 +19,12 @@ func GetWithPrefixPattern(pattern string, limit int64) (keys []string, values []
 
 	keys, cursor, err = rdb.Scan(ctx, cursor, pattern, limit).Result()
 	if err != nil {
+		fmt.Println("err redis scan: ", err.Error())
 		return
 	}
 
 	if len(keys) == 0 {
+		fmt.Println("NO keys")
 		return
 	}
 
